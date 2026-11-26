@@ -41,7 +41,7 @@
       -webkit-font-smoothing: antialiased;
     }
 
-    /* ================= TOP NAVBAR (เหมือนหน้า Post-Test) ================= */
+    /* ================= TOP NAVBAR ================= */
     .navbar {
       background-color: var(--bq-black);
       color: var(--bq-white);
@@ -432,7 +432,7 @@
       background: var(--bq-yellow);
     }
 
-    /* ================= 4 KPI CARDS (เอาป้าย +0.05 ออกตามที่ระบุ) ================= */
+    /* ================= 4 KPI CARDS ================= */
     .kpi-grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
@@ -604,43 +604,57 @@
       margin-right: 6px;
     }
 
-    /* ================= QUALITATIVE COMMENTS (แสดงทั้งหมดครบทุกรายการ) ================= */
+    /* ================= QUALITATIVE COMMENTS (แสดงเรียงทีละหัวข้อแบบเต็มความกว้าง) ================= */
     .qual-cols {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 14px;
+      grid-template-columns: 1fr;
+      gap: 16px;
     }
 
     .qual-col {
       background: #F8FAFC;
       border: 1px solid var(--bq-border);
+      border-left: 4px solid var(--bq-black);
       border-radius: 10px;
-      padding: 14px;
+      padding: 16px 18px;
     }
 
     .qual-col h4 {
-      font-size: 0.85rem;
+      font-size: 0.9rem;
       font-weight: 700;
       color: var(--bq-black);
-      margin-bottom: 10px;
-      padding-bottom: 6px;
+      margin-bottom: 12px;
+      padding-bottom: 8px;
       border-bottom: 1px solid var(--bq-border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .qual-count-badge {
+      background: var(--bq-yellow);
+      color: var(--bq-black);
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 2px 10px;
+      border-radius: 99px;
     }
 
     .comment-list {
       display: flex;
       flex-wrap: wrap;
-      gap: 6px;
+      gap: 8px;
     }
 
     .chip {
       background: var(--bq-white);
       border: 1px solid var(--bq-border);
-      border-radius: 6px;
-      padding: 5px 10px;
-      font-size: 0.8rem;
-      color: #334155;
-      line-height: 1.4;
+      border-radius: 7px;
+      padding: 6px 12px;
+      font-size: 0.83rem;
+      color: #1E293B;
+      line-height: 1.45;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.03);
     }
 
     /* Footer */
@@ -699,9 +713,6 @@
       .grid-2col {
         grid-template-columns: 1fr;
       }
-      .qual-cols {
-        grid-template-columns: 1fr;
-      }
     }
 
     @media (max-width: 680px) {
@@ -741,9 +752,16 @@
       .kpi-grid {
         grid-template-columns: 1fr;
       }
+      .qual-col {
+        padding: 12px 14px;
+      }
+      .chip {
+        font-size: 0.8rem;
+        padding: 5px 10px;
+      }
     }
 
-    /* ================= PRINT / A4 PDF LAYOUT (จัดหน้าให้อ่านง่ายเป็นทางการ) ================= */
+    /* ================= PRINT / A4 PDF LAYOUT ================= */
     @media print {
       @page {
         size: A4 portrait;
@@ -845,23 +863,31 @@
       }
 
       .qual-cols {
-        grid-template-columns: repeat(3, 1fr) !important;
-        gap: 8px !important;
+        grid-template-columns: 1fr !important;
+        gap: 10px !important;
       }
 
       .qual-col {
-        padding: 9px 10px !important;
+        padding: 10px 12px !important;
         background: #FFFFFF !important;
+        border: 1px solid #CBD5E1 !important;
+        border-left: 4px solid var(--bq-black) !important;
       }
 
       .qual-col h4 {
-        font-size: 11px !important;
-        margin-bottom: 6px !important;
+        font-size: 11.5px !important;
+        margin-bottom: 8px !important;
+        break-after: avoid !important;
+      }
+
+      .comment-list {
+        gap: 5px !important;
       }
 
       .chip {
-        font-size: 9.5px !important;
-        padding: 3px 7px !important;
+        font-size: 10px !important;
+        padding: 3px 8px !important;
+        box-shadow: none !important;
         break-inside: avoid !important;
       }
     }
@@ -875,7 +901,7 @@
     <div style="font-weight: 500; font-size: 0.95rem;">กำลังโหลดข้อมูลรายงานผลการประเมิน...</div>
   </div>
 
-  <!-- Top Navigation (เหมือนหน้า Post-Test) -->
+  <!-- Top Navigation -->
   <header class="navbar">
     <div class="navbar-inner">
       <div class="brand-area">
@@ -952,7 +978,7 @@
       <!-- 2. Overall Benchmark Bar -->
       <div id="benchmarkContainer"></div>
 
-      <!-- 3. 4 KPI Cards (สะอาด ไม่มีตัวเลขส่วนต่างเล็กๆ กวนสายตา) -->
+      <!-- 3. 4 KPI Cards -->
       <div class="kpi-grid" id="kpiGrid"></div>
 
       <!-- 4. Dimension 1 & 2 -->
@@ -961,7 +987,7 @@
       <!-- 5. Dimension 3: Modules Ranking -->
       <div class="section-card" id="modulesCard"></div>
 
-      <!-- 6. Dimension 4: Qualitative Comments (แสดงข้อความทั้งหมด) -->
+      <!-- 6. Dimension 4: Qualitative Comments (แสดงเรียงทีละหัวข้อแบบเต็มความกว้าง) -->
       <div class="section-card qual-section-print" id="commentsCard"></div>
 
       <!-- Footer -->
@@ -1024,7 +1050,6 @@
       container.innerHTML = '';
       mobileSelect.innerHTML = '';
 
-      // 1. ปุ่มภาพรวมทุกรุ่น
       const ovLabel = `ภาพรวมทุกรุ่น (${REPORT_DATA.overall.respondents} คน)`;
       const ovBtn = document.createElement('button');
       ovBtn.className = 'tab-btn' + (ACTIVE_TAB_ID === 'OVERALL' ? ' active' : '');
@@ -1038,7 +1063,6 @@
       if (ACTIVE_TAB_ID === 'OVERALL') ovOpt.selected = true;
       mobileSelect.appendChild(ovOpt);
 
-      // 2. ปุ่มรายรุ่น (เริ่มที่รุ่นที่ 3 เป็นต้นไป)
       REPORT_DATA.cohorts.forEach(c => {
         const label = `${c.tabShortTitle} (${c.dateLabel})`;
 
@@ -1072,7 +1096,6 @@
 
       if (!sec) return;
 
-      // Header Info
       const scopeText = isOverall
         ? `ภาพรวมทั้งหมด (${REPORT_DATA.meta.totalCohorts} รุ่น)`
         : `${sec.badgeTitle} (${sec.dateLabel})`;
@@ -1082,7 +1105,6 @@
         : `วันที่อบรม: ${sec.dateLabel} • ผู้ประเมิน ${sec.respondents} คน`;
       document.getElementById('footerTimestamp').innerText = `อัปเดตข้อมูลล่าสุด: ${REPORT_DATA.meta.generatedAt}`;
 
-      // Benchmark Bar
       const ov = REPORT_DATA.overall;
       document.getElementById('benchmarkContainer').innerHTML = `
         <div class="benchmark-card">
@@ -1110,7 +1132,6 @@
         </div>
       `;
 
-      // 4 KPI Cards (สะอาด ไม่มีป้าย +0.05)
       const d1 = sec.dimension1;
       const d2 = sec.dimension2;
       document.getElementById('kpiGrid').innerHTML = `
@@ -1136,13 +1157,11 @@
         </div>
       `;
 
-      // Dimensions 1 & 2
       document.getElementById('dimensionsGrid').innerHTML = `
         ${renderDimensionCard(d1, null)}
         ${renderDimensionCard(d2, d2.prePost)}
       `;
 
-      // Dimension 3: Modules Ranking
       const d3 = sec.dimension3;
       document.getElementById('modulesCard').innerHTML = `
         <div class="card-head">
@@ -1164,7 +1183,6 @@
         </div>
       `;
 
-      // Dimension 4: Qualitative Comments (แสดงทั้งหมดครบทุกรายการ)
       const d4 = sec.dimension4;
       document.getElementById('commentsCard').innerHTML = `
         <div class="card-head">
@@ -1172,9 +1190,9 @@
           <div class="card-avg">ความคิดเห็นทั้งหมด</div>
         </div>
         <div class="qual-cols">
-          ${renderCommentCol('สิ่งที่ได้รับจากการอบรม', d4.takeaways)}
-          ${renderCommentCol('ประเด็นสำคัญสำหรับพนักงานสาขา', d4.branchPriorities)}
-          ${renderCommentCol('ข้อเสนอแนะเพิ่มเติม', d4.suggestions)}
+          ${renderCommentCol('4.1 สิ่งที่ได้รับจากการอบรม', d4.takeaways)}
+          ${renderCommentCol('4.2 ประเด็นสำคัญสำหรับพนักงานสาขา', d4.branchPriorities)}
+          ${renderCommentCol('4.3 ข้อเสนอแนะเพิ่มเติม', d4.suggestions)}
         </div>
       `;
     }
@@ -1218,15 +1236,21 @@
       if (!list || list.length === 0) {
         return `
           <div class="qual-col">
-            <h4>${escapeHtml(title)} (0)</h4>
-            <div style="font-size:0.8rem; color:#64748B;">ไม่มีข้อเสนอแนะ</div>
+            <h4>
+              <span>${escapeHtml(title)}</span>
+              <span class="qual-count-badge">0 รายการ</span>
+            </h4>
+            <div style="font-size:0.82rem; color:#64748B;">ไม่มีข้อเสนอแนะ</div>
           </div>
         `;
       }
 
       return `
         <div class="qual-col">
-          <h4>${escapeHtml(title)} (${list.length})</h4>
+          <h4>
+            <span>${escapeHtml(title)}</span>
+            <span class="qual-count-badge">${list.length} รายการ</span>
+          </h4>
           <div class="comment-list">
             ${list.map(c => `<span class="chip">${escapeHtml(c.text)}</span>`).join('')}
           </div>
