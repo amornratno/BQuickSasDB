@@ -3,271 +3,350 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>B-Quik Training Evaluation Report - The Quick Recovery</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <title>B-Quik Training Evaluation Report | The Quick Recovery</title>
+  <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
   <style>
     :root {
       --bq-yellow: #FFD100;
-      --bq-yellow-hover: #F5C400;
-      --bq-yellow-soft: #FEFCE8;
-      --bq-yellow-border: #FDE047;
-      --bq-black: #141416;
-      --bq-charcoal: #222226;
-      --bq-bg: #F6F6F7;
-      --bq-card: #FFFFFF;
-      --bq-text: #141416;
-      --bq-sub: #52525B;
-      --bq-muted: #71717A;
-      --bq-border: #E4E4E7;
-      --green: #16A34A;
-      --green-soft: #F0FDF4;
+      --bq-yellow-hover: #F2C200;
+      --bq-yellow-light: #FFFBEB;
+      --bq-yellow-border: #FDE68A;
+      --bq-black: #111111;
+      --bq-dark-gray: #222222;
+      --bq-mid-gray: #64748B;
+      --bq-border: #E2E8F0;
+      --bq-bg: #F1F5F9;
+      --bq-white: #FFFFFF;
+      --pass-green: #15803D;
+      --pass-bg: #DCFCE7;
+      --shadow-sm: 0 1px 3px rgba(0,0,0,0.06);
+      --shadow-md: 0 4px 16px rgba(0,0,0,0.08);
     }
 
     * {
       box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Prompt', sans-serif;
       -webkit-print-color-adjust: exact !important;
       print-color-adjust: exact !important;
     }
 
     body {
-      margin: 0;
-      padding: 0;
-      font-family: 'Sarabun', sans-serif;
       background-color: var(--bq-bg);
-      color: var(--bq-text);
-      font-size: 14px;
-      line-height: 1.55;
+      color: var(--bq-black);
+      line-height: 1.5;
       -webkit-font-smoothing: antialiased;
     }
 
-    /* ================= TOP HEADER (ธีมเหลือง-ดำ Minimal บนหน้าจอเว็บ) ================= */
-    .top-nav {
+    /* ================= TOP NAVBAR (เหมือนหน้า Post-Test) ================= */
+    .navbar {
+      background-color: var(--bq-black);
+      color: var(--bq-white);
+      border-bottom: 4px solid var(--bq-yellow);
+      padding: 14px 24px;
       position: sticky;
       top: 0;
-      z-index: 1000;
-      background: var(--bq-black);
-      color: #FFFFFF;
-      border-bottom: 3px solid var(--bq-yellow);
+      z-index: 100;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.18);
     }
 
-    .nav-inner {
-      max-width: 1220px;
+    .navbar-inner {
+      max-width: 1180px;
       margin: 0 auto;
-      padding: 12px 24px;
       display: flex;
-      flex-wrap: wrap;
-      align-items: center;
       justify-content: space-between;
-      gap: 12px;
+      align-items: center;
+      gap: 16px;
     }
 
-    .brand-group {
+    .brand-area {
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 14px;
     }
 
-    .brand-badge {
-      background: var(--bq-yellow);
+    .nav-logo-img {
+      height: 44px;
+      width: auto;
+      border-radius: 6px;
+      object-fit: contain;
+      background-color: var(--bq-yellow);
+      border: 1.5px solid var(--bq-yellow);
+      flex-shrink: 0;
+    }
+
+    .brand-badge-fallback {
+      background-color: var(--bq-yellow);
       color: var(--bq-black);
       font-weight: 800;
-      font-size: 13px;
-      padding: 4px 10px;
-      border-radius: 5px;
-      letter-spacing: 0.5px;
+      font-size: 1.15rem;
+      padding: 5px 12px;
+      border-radius: 6px;
+      display: none;
     }
 
-    .brand-title {
-      font-size: 15.5px;
+    .brand-title h1 {
+      font-size: 1.05rem;
       font-weight: 700;
-      color: #FFFFFF;
+      color: var(--bq-yellow);
+      letter-spacing: 0.3px;
     }
 
-    .brand-sub {
-      font-size: 12px;
-      color: #A1A1AA;
+    .brand-title p {
+      font-size: 0.8rem;
+      color: #CBD5E1;
     }
 
-    .nav-actions {
+    .action-buttons {
       display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-shrink: 0;
+    }
+
+    .btn {
+      padding: 9px 16px;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 0.85rem;
+      cursor: pointer;
+      border: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      transition: all 0.2s ease;
+    }
+
+    .btn-yellow {
+      background-color: var(--bq-yellow);
+      color: var(--bq-black);
+    }
+
+    .btn-yellow:hover {
+      background-color: var(--bq-yellow-hover);
+      transform: translateY(-1px);
+    }
+
+    .btn-outline {
+      background-color: rgba(255,255,255,0.08);
+      color: var(--bq-white);
+      border: 1px solid rgba(255, 209, 0, 0.5);
+    }
+
+    .btn-outline:hover {
+      background-color: var(--bq-yellow);
+      color: var(--bq-black);
+    }
+
+    /* ================= MAIN CONTAINER ================= */
+    .main-wrapper {
+      max-width: 1180px;
+      margin: 20px auto 48px auto;
+      padding: 0 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    /* ================= FILTER & BENCHMARK CONTROL PANEL ================= */
+    .control-panel {
+      background: var(--bq-white);
+      padding: 16px 20px;
+      border-radius: 12px;
+      box-shadow: var(--shadow-sm);
+      border: 1px solid var(--bq-border);
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .control-top-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
       flex-wrap: wrap;
+      gap: 10px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid #F1F5F9;
+    }
+
+    .filter-label {
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--bq-black);
+      display: flex;
+      align-items: center;
+      gap: 7px;
+    }
+
+    .benchmark-pill {
+      background: var(--bq-yellow-light);
+      border: 1px solid var(--bq-yellow-border);
+      padding: 6px 14px;
+      border-radius: 8px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--bq-black);
+      display: inline-flex;
       align-items: center;
       gap: 8px;
     }
 
-    .btn {
+    /* Desktop: ปุ่มเรียงขึ้นบรรทัดใหม่อัตโนมัติ ไม่เกิดแถบเลื่อน */
+    .batch-tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      width: 100%;
+    }
+
+    .tab-btn {
       padding: 7px 14px;
-      border-radius: 7px;
-      font-family: 'Sarabun', sans-serif;
-      font-size: 13px;
-      font-weight: 700;
+      border-radius: 8px;
+      border: 1px solid var(--bq-border);
+      background: #F8FAFC;
+      color: var(--bq-black);
+      font-weight: 600;
+      font-size: 0.82rem;
       cursor: pointer;
-      border: 1px solid transparent;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
       transition: all 0.15s ease;
     }
 
-    .btn-dark-ghost {
-      background: rgba(255, 255, 255, 0.08);
-      color: #E4E4E7;
-      border-color: rgba(255, 255, 255, 0.14);
-    }
-    .btn-dark-ghost:hover {
-      background: rgba(255, 255, 255, 0.16);
-      color: #FFFFFF;
-    }
-
-    .btn-outline-yellow {
-      background: transparent;
-      color: var(--bq-yellow);
+    .tab-btn:hover {
+      background: var(--bq-yellow-light);
       border-color: var(--bq-yellow);
     }
-    .btn-outline-yellow:hover {
-      background: rgba(255, 209, 0, 0.12);
+
+    .tab-btn.active {
+      background: var(--bq-black);
+      color: var(--bq-yellow);
+      border-color: var(--bq-black);
+      box-shadow: 0 2px 6px rgba(0,0,0,0.12);
     }
 
-    .btn-yellow {
-      background: var(--bq-yellow);
+    /* Mobile: เมนู Dropdown */
+    .mobile-select-wrapper {
+      display: none;
+      width: 100%;
+    }
+
+    .batch-select {
+      width: 100%;
+      padding: 10px 14px;
+      border-radius: 8px;
+      border: 1.5px solid var(--bq-black);
+      background-color: #F8FAFC;
       color: var(--bq-black);
-    }
-    .btn-yellow:hover {
-      background: var(--bq-yellow-hover);
-    }
-
-    /* ================= COHORT TABS BAR ================= */
-    .tabs-bar-bg {
-      background: var(--bq-charcoal);
-      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+      outline: none;
     }
 
-    .tabs-strip {
-      max-width: 1220px;
-      margin: 0 auto;
-      padding: 8px 24px;
+    /* ================= REPORT SHEET ================= */
+    .report-container {
+      background: var(--bq-white);
+      padding: 24px;
+      border-radius: 14px;
+      box-shadow: var(--shadow-md);
+      border: 1px solid var(--bq-border);
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    /* Report Header Banner */
+    .report-header {
+      background: linear-gradient(135deg, #111111 0%, #262626 100%);
+      color: var(--bq-white);
+      padding: 18px 22px;
+      border-bottom: 4px solid var(--bq-yellow);
+      border-radius: 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .report-header-left {
       display: flex;
       align-items: center;
-      gap: 6px;
-      overflow-x: auto;
-      scrollbar-width: thin;
+      gap: 16px;
     }
 
-    .pill-tab {
-      background: rgba(255, 255, 255, 0.06);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      border-radius: 99px;
-      padding: 6px 14px;
-      font-family: 'Sarabun', sans-serif;
-      font-size: 13px;
-      font-weight: 600;
-      color: #D4D4D8;
-      cursor: pointer;
-      white-space: nowrap;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      transition: all 0.15s ease;
+    .report-logo {
+      height: 54px;
+      width: auto;
+      border-radius: 8px;
+      background: var(--bq-yellow);
+      padding: 2px;
+      flex-shrink: 0;
     }
 
-    .pill-tab:hover {
-      background: rgba(255, 255, 255, 0.14);
-      color: #FFFFFF;
+    .report-header h2 {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--bq-yellow);
+      line-height: 1.3;
     }
 
-    .pill-tab.active {
+    .report-header p {
+      font-size: 0.84rem;
+      color: #E2E8F0;
+      margin-top: 2px;
+    }
+
+    .report-header-right {
+      text-align: right;
+    }
+
+    .scope-badge {
       background: var(--bq-yellow);
       color: var(--bq-black);
-      border-color: var(--bq-yellow);
       font-weight: 700;
-    }
-
-    .pill-tab .tab-meta {
-      font-size: 11.5px;
-      font-weight: 400;
-      opacity: 0.82;
-    }
-
-    .latest-dot {
+      font-size: 0.82rem;
+      padding: 4px 12px;
+      border-radius: 6px;
       display: inline-block;
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-      background: #22C55E;
-    }
-    .pill-tab.active .latest-dot {
-      background: var(--bq-black);
     }
 
-    /* ================= MAIN CONTAINER ================= */
-    .container {
-      max-width: 1220px;
-      margin: 24px auto 60px auto;
-      padding: 0 24px;
+    .report-header-right small {
+      display: block;
+      font-size: 0.76rem;
+      color: #CBD5E1;
+      margin-top: 5px;
     }
 
-    /* Loading Spinner */
-    .loading-box {
-      background: #FFFFFF;
-      border: 1px solid var(--bq-border);
-      border-radius: 14px;
-      padding: 60px 24px;
-      text-align: center;
-      color: var(--bq-sub);
-    }
-
-    .spinner {
-      width: 34px;
-      height: 34px;
-      border: 3.5px solid #E4E4E7;
-      border-top-color: var(--bq-yellow);
-      border-right-color: var(--bq-black);
-      border-radius: 50%;
-      animation: spin 0.8s linear infinite;
-      margin: 0 auto 14px auto;
-    }
-
-    @keyframes spin {
-      to { transform: rotate(360deg); }
-    }
-
-    /* ================= FORMAL PDF DOCUMENT HEADER & FOOTER (แสดงเฉพาะตอนพิมพ์ PDF) ================= */
-    .formal-pdf-header,
-    .formal-pdf-footer {
-      display: none;
-    }
-
-    /* ================= COMPACT OVERALL BENCHMARK BAR ================= */
+    /* ================= OVERALL BENCHMARK BAR ================= */
     .benchmark-card {
-      background: var(--bq-card);
+      background: #FAFAFA;
       border: 1px solid var(--bq-border);
       border-left: 5px solid var(--bq-yellow);
-      border-radius: 12px;
-      padding: 16px 22px;
-      margin-bottom: 24px;
+      border-radius: 10px;
+      padding: 14px 18px;
       display: grid;
-      grid-template-columns: 245px 1fr;
-      gap: 24px;
+      grid-template-columns: 230px 1fr;
+      gap: 20px;
       align-items: center;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
     }
 
     .bm-summary {
       border-right: 1px solid var(--bq-border);
-      padding-right: 20px;
+      padding-right: 16px;
     }
 
     .bm-eyebrow {
-      font-size: 11.5px;
+      font-size: 0.75rem;
       font-weight: 700;
-      color: var(--bq-muted);
-      letter-spacing: 0.3px;
+      color: var(--bq-mid-gray);
     }
 
     .bm-big-score {
-      font-size: 32px;
+      font-size: 1.85rem;
       font-weight: 800;
       color: var(--bq-black);
       line-height: 1.15;
@@ -275,57 +354,39 @@
     }
 
     .bm-big-score span {
-      font-size: 14px;
+      font-size: 0.85rem;
       font-weight: 500;
-      color: var(--bq-muted);
+      color: var(--bq-mid-gray);
     }
 
     .bm-subtext {
-      font-size: 12.5px;
-      color: var(--bq-sub);
-    }
-
-    .bm-chart-wrap {
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-      min-width: 0;
-    }
-
-    .bm-chart-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-size: 12px;
-      color: var(--bq-sub);
+      font-size: 0.78rem;
+      color: #475569;
     }
 
     .bm-bars-row {
-      display: flex;
-      gap: 10px;
-      overflow-x: auto;
-      padding-bottom: 4px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(115px, 1fr));
+      gap: 8px;
     }
 
     .bm-col-item {
-      flex: 1 0 125px;
-      background: #FAFAFA;
+      background: var(--bq-white);
       border: 1px solid var(--bq-border);
-      border-radius: 10px;
-      padding: 8px 12px;
+      border-radius: 8px;
+      padding: 8px 10px;
       cursor: pointer;
       transition: all 0.15s ease;
     }
 
     .bm-col-item:hover {
-      border-color: #A1A1AA;
-      background: #F4F4F5;
+      border-color: var(--bq-black);
     }
 
     .bm-col-item.is-selected {
       background: var(--bq-black);
       border-color: var(--bq-black);
-      color: #FFFFFF;
+      color: var(--bq-white);
     }
 
     .bm-col-top {
@@ -336,40 +397,34 @@
     }
 
     .bm-col-name {
-      font-size: 12px;
+      font-size: 0.78rem;
       font-weight: 600;
-      color: var(--bq-sub);
+      color: #475569;
     }
 
     .bm-col-item.is-selected .bm-col-name {
       color: var(--bq-yellow);
-      font-weight: 700;
     }
 
     .bm-col-val {
-      font-size: 14px;
+      font-size: 0.88rem;
       font-weight: 800;
-      color: var(--bq-black);
-    }
-
-    .bm-col-item.is-selected .bm-col-val {
-      color: #FFFFFF;
     }
 
     .bm-mini-track {
       height: 5px;
-      background: #E4E4E7;
+      background: #E2E8F0;
       border-radius: 99px;
       overflow: hidden;
     }
 
     .bm-col-item.is-selected .bm-mini-track {
-      background: rgba(255, 255, 255, 0.2);
+      background: rgba(255,255,255,0.2);
     }
 
     .bm-mini-fill {
       height: 100%;
-      background: #71717A;
+      background: #64748B;
       border-radius: 99px;
     }
 
@@ -377,141 +432,101 @@
       background: var(--bq-yellow);
     }
 
-    /* ================= COHORT HEADER & 4 KPI BOXES ================= */
-    .section-header {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
-      align-items: flex-end;
-      gap: 12px;
-      margin-bottom: 16px;
-    }
-
-    .section-header h1 {
-      margin: 0;
-      font-size: 22px;
-      font-weight: 800;
-      color: var(--bq-black);
-    }
-
-    .section-header .date-sub {
-      font-size: 13.5px;
-      color: var(--bq-sub);
-      margin-top: 2px;
-    }
-
-    .respondent-pill {
-      background: var(--bq-black);
-      color: var(--bq-yellow);
-      padding: 6px 14px;
-      border-radius: 99px;
-      font-size: 13px;
-      font-weight: 700;
-    }
-
-    .kpi-row {
+    /* ================= 4 KPI CARDS (เอาป้าย +0.05 ออกตามที่ระบุ) ================= */
+    .kpi-grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
       gap: 14px;
-      margin-bottom: 22px;
     }
 
-    .kpi-box {
-      background: var(--bq-card);
+    .kpi-card {
+      background: #F8FAFC;
       border: 1px solid var(--bq-border);
-      border-radius: 12px;
-      padding: 16px 18px;
+      border-top: 4px solid var(--bq-yellow);
+      border-radius: 10px;
+      padding: 14px 16px;
     }
 
-    .kpi-box.featured {
-      background: var(--bq-yellow-soft);
-      border-color: var(--bq-yellow);
-      border-width: 1.5px;
+    .kpi-card.highlight {
+      background: var(--bq-black);
+      color: var(--bq-white);
+      border-color: var(--bq-black);
     }
 
-    .kpi-title {
-      font-size: 12.5px;
-      color: var(--bq-sub);
-      font-weight: 600;
+    .kpi-label {
+      font-size: 0.8rem;
+      color: var(--bq-mid-gray);
+      font-weight: 500;
     }
 
-    .kpi-number-row {
-      display: flex;
-      align-items: baseline;
-      justify-content: space-between;
-      margin: 6px 0 4px 0;
+    .kpi-card.highlight .kpi-label {
+      color: #CBD5E1;
     }
 
-    .kpi-number {
-      font-size: 26px;
+    .kpi-value {
+      font-size: 1.7rem;
       font-weight: 800;
-      color: var(--bq-black);
-      line-height: 1.1;
+      line-height: 1.2;
+      margin: 4px 0;
     }
 
-    .kpi-foot {
-      font-size: 12px;
-      color: var(--bq-muted);
+    .kpi-card.highlight .kpi-value {
+      color: var(--bq-yellow);
     }
 
-    .tag-diff {
-      font-size: 11px;
-      font-weight: 700;
-      padding: 2px 7px;
-      border-radius: 6px;
+    .kpi-sub {
+      font-size: 0.78rem;
+      color: var(--bq-mid-gray);
     }
-    .tag-pos { background: var(--green-soft); color: var(--green); }
-    .tag-neg { background: #FEF2F2; color: #DC2626; }
-    .tag-neu { background: #F4F4F5; color: var(--bq-sub); }
 
-    /* ================= 2-COLUMN DIMENSION CARDS ================= */
+    .kpi-card.highlight .kpi-sub {
+      color: #94A3B8;
+    }
+
+    /* ================= DIMENSION CARDS ================= */
     .grid-2col {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 18px;
-      margin-bottom: 18px;
+      gap: 16px;
     }
 
-    .card {
-      background: var(--bq-card);
+    .section-card {
+      background: var(--bq-white);
       border: 1px solid var(--bq-border);
-      border-radius: 14px;
-      padding: 20px 22px;
-      margin-bottom: 18px;
-    }
-
-    .grid-2col .card {
-      margin-bottom: 0;
+      border-radius: 10px;
+      padding: 18px 20px;
     }
 
     .card-head {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 16px;
-      padding-bottom: 12px;
-      border-bottom: 1px solid #F4F4F5;
+      gap: 10px;
+      margin-bottom: 14px;
+      padding-bottom: 10px;
+      border-bottom: 1.5px solid #F1F5F9;
     }
 
     .card-title {
-      font-size: 15.5px;
-      font-weight: 800;
+      font-size: 0.95rem;
+      font-weight: 700;
       color: var(--bq-black);
     }
 
     .card-avg {
-      font-size: 13px;
+      font-size: 0.8rem;
       font-weight: 700;
       color: var(--bq-yellow);
       background: var(--bq-black);
-      padding: 3px 11px;
-      border-radius: 8px;
+      padding: 3px 10px;
+      border-radius: 6px;
+      white-space: nowrap;
     }
 
     .metric-list {
       display: flex;
       flex-direction: column;
-      gap: 14px;
+      gap: 13px;
     }
 
     .metric-top {
@@ -523,28 +538,27 @@
     }
 
     .metric-label {
-      font-size: 13.5px;
-      color: var(--bq-text);
+      font-size: 0.84rem;
+      color: var(--bq-black);
       font-weight: 500;
     }
 
     .metric-val {
-      font-size: 14px;
+      font-size: 0.86rem;
       font-weight: 700;
-      color: var(--bq-black);
       white-space: nowrap;
     }
 
     .metric-val small {
       font-weight: 400;
-      color: var(--bq-muted);
-      font-size: 11.5px;
+      color: var(--bq-mid-gray);
+      font-size: 0.76rem;
     }
 
     .clean-track {
       position: relative;
       height: 7px;
-      background: #F4F4F5;
+      background: #F1F5F9;
       border-radius: 99px;
       overflow: hidden;
     }
@@ -552,31 +566,24 @@
     .clean-fill {
       height: 100%;
       border-radius: 99px;
-      background: linear-gradient(90deg, #141416 0%, #EAB308 100%);
+      background: linear-gradient(90deg, #111111 0%, #EAB308 100%);
     }
 
-    .benchmark-pin {
-      position: absolute;
-      top: 0;
-      bottom: 0;
-      width: 2.5px;
-      background: #DC2626;
-      z-index: 2;
-    }
-
-    .prepost-minimal {
+    .prepost-banner {
       margin-top: 16px;
-      padding: 12px 14px;
-      background: var(--bq-yellow-soft);
+      padding: 11px 14px;
+      background: var(--bq-yellow-light);
       border: 1px solid var(--bq-yellow-border);
-      border-radius: 10px;
+      border-radius: 8px;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      font-size: 13px;
-      color: var(--bq-black);
+      flex-wrap: wrap;
+      gap: 8px;
+      font-size: 0.83rem;
     }
 
+    /* ================= MODULES RANKING ================= */
     .mod-list {
       display: flex;
       flex-direction: column;
@@ -586,91 +593,98 @@
     .mod-top {
       display: flex;
       justify-content: space-between;
-      font-size: 13.5px;
+      align-items: baseline;
+      gap: 12px;
+      font-size: 0.84rem;
       margin-bottom: 4px;
     }
 
     .mod-rank {
-      display: inline-block;
-      min-width: 20px;
-      color: var(--bq-black);
       font-weight: 800;
-      margin-right: 4px;
+      margin-right: 6px;
     }
 
+    /* ================= QUALITATIVE COMMENTS (แสดงทั้งหมดครบทุกรายการ) ================= */
     .qual-cols {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 16px;
+      gap: 14px;
     }
 
     .qual-col {
-      background: #FAFAFA;
-      border: 1px solid #F4F4F5;
+      background: #F8FAFC;
+      border: 1px solid var(--bq-border);
       border-radius: 10px;
       padding: 14px;
     }
 
     .qual-col h4 {
-      margin: 0 0 10px 0;
-      font-size: 13px;
+      font-size: 0.85rem;
       font-weight: 700;
       color: var(--bq-black);
+      margin-bottom: 10px;
+      padding-bottom: 6px;
+      border-bottom: 1px solid var(--bq-border);
     }
 
-    .comment-chips {
+    .comment-list {
       display: flex;
       flex-wrap: wrap;
       gap: 6px;
     }
 
     .chip {
-      background: #FFFFFF;
+      background: var(--bq-white);
       border: 1px solid var(--bq-border);
       border-radius: 6px;
-      padding: 4px 9px;
-      font-size: 12px;
-      color: var(--bq-sub);
+      padding: 5px 10px;
+      font-size: 0.8rem;
+      color: #334155;
+      line-height: 1.4;
     }
 
-    .chip.hidden-chip {
-      display: none;
+    /* Footer */
+    .report-footer {
+      padding-top: 12px;
+      border-top: 1px solid var(--bq-border);
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 8px;
+      font-size: 0.76rem;
+      color: var(--bq-mid-gray);
     }
 
-    .qual-col.expanded .chip.hidden-chip {
-      display: inline-block;
+    /* Loading Overlay */
+    #loader {
+      position: fixed;
+      inset: 0;
+      background: rgba(17, 17, 17, 0.94);
+      color: var(--bq-yellow);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+      gap: 14px;
     }
 
-    .toggle-more-btn {
-      margin-top: 8px;
-      background: none;
-      border: none;
-      padding: 0;
-      font-family: 'Sarabun', sans-serif;
-      font-size: 12px;
-      font-weight: 700;
-      color: #B45309;
-      cursor: pointer;
+    .spinner {
+      width: 40px;
+      height: 40px;
+      border: 4px solid rgba(255, 209, 0, 0.2);
+      border-top-color: var(--bq-yellow);
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
     }
 
-    .print-only-more-note {
-      display: none;
+    @keyframes spin {
+      to { transform: rotate(360deg); }
     }
 
-    .print-all-only {
-      display: none;
-    }
-
-    .cohort-section.page-break-before {
-      page-break-before: always;
-      break-before: page;
-    }
-
+    /* ================= RESPONSIVE (TABLET & MOBILE) ================= */
     @media (max-width: 960px) {
-      .benchmark-card,
-      .kpi-row,
-      .grid-2col,
-      .qual-cols {
+      .benchmark-card {
         grid-template-columns: 1fr;
       }
       .bm-summary {
@@ -679,767 +693,525 @@
         padding-right: 0;
         padding-bottom: 12px;
       }
+      .kpi-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .grid-2col {
+        grid-template-columns: 1fr;
+      }
+      .qual-cols {
+        grid-template-columns: 1fr;
+      }
     }
 
-    /* ================= FORMAL EXECUTIVE A4 PRINT STYLES (ไม่เกิน 2 หน้าต่อรุ่น) ================= */
-    @page {
-      size: A4 portrait;
-      margin: 9mm 11mm 10mm 11mm;
+    @media (max-width: 680px) {
+      .navbar {
+        padding: 12px 16px;
+      }
+      .navbar-inner {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .action-buttons {
+        width: 100%;
+      }
+      .action-buttons .btn {
+        flex: 1;
+        justify-content: center;
+        font-size: 0.8rem;
+        padding: 8px 10px;
+      }
+      /* บนมือถือ ซ่อนปุ่มแท็บ แล้วแสดง Dropdown แทน */
+      .batch-tabs {
+        display: none;
+      }
+      .mobile-select-wrapper {
+        display: block;
+      }
+      .report-container {
+        padding: 16px;
+      }
+      .report-header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .report-header-right {
+        text-align: left;
+      }
+      .kpi-grid {
+        grid-template-columns: 1fr;
+      }
     }
 
+    /* ================= PRINT / A4 PDF LAYOUT (จัดหน้าให้อ่านง่ายเป็นทางการ) ================= */
     @media print {
+      @page {
+        size: A4 portrait;
+        margin: 10mm 11mm;
+      }
+
       body {
         background: #FFFFFF !important;
-        font-size: 10.5px !important;
+        font-size: 11px !important;
         line-height: 1.4 !important;
       }
 
-      .top-nav,
-      .no-print,
-      .benchmark-cohort-only-screen,
-      .toggle-more-btn,
-      .section-header,
-      .chip.hidden-chip {
+      .navbar, .control-panel, #loader {
         display: none !important;
       }
 
-      .print-only-more-note {
-        display: block !important;
-        margin-top: 5px;
-        font-size: 9.5px;
-        font-weight: 600;
-        color: #B45309;
-      }
-
-      .formal-pdf-header {
-        display: flex !important;
-        justify-content: space-between;
-        align-items: center;
-        padding: 10px 14px;
-        margin-bottom: 10px;
-        background: #FFFFFF;
-        border: 1.5px solid var(--bq-black);
-        border-top: 5px solid var(--bq-yellow);
-        border-radius: 8px;
-        page-break-inside: avoid !important;
-        break-inside: avoid !important;
-      }
-
-      .fph-left {
-        display: flex;
-        align-items: center;
-        gap: 12px;
-      }
-
-      .fph-logo-box {
-        width: 72px;
-        height: 40px;
-        border-radius: 6px;
-        overflow: hidden;
-        background: var(--bq-yellow);
-        border: 1px solid #E4E4E7;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        flex-shrink: 0;
-      }
-
-      .fph-logo-img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        display: block;
-      }
-
-      .fph-logo-fallback {
-        display: none;
-        font-weight: 800;
-        font-size: 14px;
-        color: var(--bq-black);
-        letter-spacing: 0.3px;
-      }
-
-      .fph-kicker {
-        font-size: 10px;
-        font-weight: 700;
-        color: #71717A;
-        letter-spacing: 0.3px;
-        line-height: 1.2;
-      }
-
-      .fph-title {
-        font-size: 14.5px;
-        font-weight: 800;
-        color: var(--bq-black);
-        letter-spacing: 0.2px;
-        line-height: 1.25;
-        margin-top: 1px;
-      }
-
-      .fph-subtitle {
-        font-size: 10.5px;
-        color: var(--bq-sub);
-        margin-top: 1px;
-      }
-
-      .fph-right {
-        text-align: right;
-        border-left: 1px solid #E4E4E7;
-        padding-left: 12px;
-        flex-shrink: 0;
-      }
-
-      .fph-scope-pill {
-        display: inline-block;
-        background: var(--bq-black);
-        color: var(--bq-yellow);
-        font-weight: 700;
-        font-size: 10.5px;
-        padding: 3px 10px;
-        border-radius: 5px;
-        margin-bottom: 3px;
-      }
-
-      .fph-meta {
-        font-size: 9.5px;
-        color: var(--bq-sub);
-      }
-
-      .formal-pdf-footer {
-        display: flex !important;
-        justify-content: space-between;
-        align-items: center;
-        margin-top: 8px;
-        padding-top: 5px;
-        border-top: 1px solid #D4D4D8;
-        font-size: 9.5px;
-        color: var(--bq-muted);
-        page-break-inside: avoid !important;
-        break-inside: avoid !important;
-      }
-
-      .container {
-        max-width: 100% !important;
-        width: 100% !important;
+      .main-wrapper {
         margin: 0 !important;
         padding: 0 !important;
+        max-width: 100% !important;
+      }
+
+      .report-container {
+        box-shadow: none !important;
+        border: none !important;
+        padding: 0 !important;
+        gap: 12px !important;
+      }
+
+      .report-header {
+        padding: 12px 16px !important;
+        border-radius: 8px !important;
+        break-inside: avoid !important;
+      }
+
+      .report-logo {
+        height: 44px !important;
+      }
+
+      .report-header h2 {
+        font-size: 14px !important;
       }
 
       .benchmark-card {
-        padding: 9px 12px !important;
-        margin-bottom: 9px !important;
-        box-shadow: none !important;
-        page-break-inside: avoid !important;
+        padding: 10px 14px !important;
+        grid-template-columns: 190px 1fr !important;
+        gap: 14px !important;
         break-inside: avoid !important;
       }
 
-      .bm-bars-row {
-        flex-wrap: wrap !important;
-        overflow: visible !important;
-        gap: 6px !important;
+      .bm-big-score {
+        font-size: 20px !important;
       }
 
-      .bm-col-item {
-        padding: 5px 8px !important;
-      }
-
-      .kpi-row {
+      .kpi-grid {
         grid-template-columns: repeat(4, 1fr) !important;
-        gap: 7px !important;
-        margin-bottom: 9px !important;
-        page-break-inside: avoid !important;
+        gap: 8px !important;
         break-inside: avoid !important;
       }
 
-      .kpi-box {
-        padding: 7px 10px !important;
-        border-radius: 7px !important;
+      .kpi-card {
+        padding: 9px 11px !important;
       }
-      .kpi-title {
-        font-size: 10.5px !important;
-      }
-      .kpi-number {
-        font-size: 17px !important;
-      }
-      .kpi-foot {
-        font-size: 10px !important;
+
+      .kpi-value {
+        font-size: 18px !important;
       }
 
       .grid-2col {
         grid-template-columns: 1fr 1fr !important;
-        gap: 8px !important;
-        margin-bottom: 8px !important;
-        page-break-inside: avoid !important;
+        gap: 10px !important;
         break-inside: avoid !important;
       }
 
-      .qual-cols {
-        grid-template-columns: repeat(3, 1fr) !important;
-        gap: 7px !important;
-      }
-
-      .card {
-        padding: 9px 11px !important;
-        margin-bottom: 8px !important;
-        border-radius: 8px !important;
-        page-break-inside: avoid !important;
+      .section-card {
+        padding: 11px 14px !important;
         break-inside: avoid !important;
       }
 
       .card-head {
-        margin-bottom: 7px !important;
-        padding-bottom: 5px !important;
+        margin-bottom: 8px !important;
+        padding-bottom: 6px !important;
       }
 
       .card-title {
         font-size: 12px !important;
       }
 
-      .card-avg {
-        font-size: 11px !important;
-        padding: 2px 8px !important;
+      .metric-list, .mod-list {
+        gap: 7px !important;
       }
 
-      .metric-list {
-        gap: 6px !important;
-      }
-
-      .metric-top {
-        margin-bottom: 3px !important;
-      }
-
-      .metric-label {
-        font-size: 10px !important;
-      }
-
-      .metric-val {
-        font-size: 11px !important;
-      }
-
-      .clean-track {
-        height: 5px !important;
-      }
-
-      .prepost-minimal {
-        margin-top: 8px !important;
-        padding: 6px 10px !important;
+      .metric-label, .mod-top {
         font-size: 10.5px !important;
       }
 
-      .mod-list {
-        gap: 5px !important;
+      .qual-section-print {
+        break-inside: auto !important;
       }
 
-      .mod-top {
-        font-size: 10.5px !important;
-        margin-bottom: 2px !important;
+      .qual-cols {
+        grid-template-columns: repeat(3, 1fr) !important;
+        gap: 8px !important;
       }
 
       .qual-col {
-        padding: 7px 9px !important;
+        padding: 9px 10px !important;
+        background: #FFFFFF !important;
       }
 
       .qual-col h4 {
-        margin-bottom: 6px !important;
         font-size: 11px !important;
-      }
-
-      .comment-chips {
-        gap: 4px !important;
+        margin-bottom: 6px !important;
       }
 
       .chip {
         font-size: 9.5px !important;
-        padding: 2px 6px !important;
-      }
-
-      body.print-mode-all .single-tab-view {
-        display: none !important;
-      }
-
-      body.print-mode-all .print-all-only {
-        display: block !important;
+        padding: 3px 7px !important;
+        break-inside: avoid !important;
       }
     }
   </style>
 </head>
 <body>
 
-  <!-- แถบนำทางธีมเหลือง-ดำ (แสดงบนหน้าจอเว็บ) -->
-  <header class="top-nav no-print">
-    <div class="nav-inner">
-      <div class="brand-group">
-        <span class="brand-badge">B-QUIK</span>
-        <div>
-          <div class="brand-title" id="navCourseTitle">The Quick Recovery • Evaluation Report</div>
-          <div class="brand-sub" id="navSubMeta">กำลังเชื่อมต่อฐานข้อมูล Google Sheet...</div>
+  <!-- Loading Screen -->
+  <div id="loader">
+    <div class="spinner"></div>
+    <div style="font-weight: 500; font-size: 0.95rem;">กำลังโหลดข้อมูลรายงานผลการประเมิน...</div>
+  </div>
+
+  <!-- Top Navigation (เหมือนหน้า Post-Test) -->
+  <header class="navbar">
+    <div class="navbar-inner">
+      <div class="brand-area">
+        <img
+          src="https://oa-profile-media.line-scdn.net/0h6S0hvefpaXwNEXaa2LAWK1hOZw0-czB4anYkT3R5MjNWZGVWVxBvZXRDax5rIW54RBd6T10RbTd_RSZWVzZhSF1MdRxVQStWMhR5Zlp6di1FUQ"
+          alt="B-Quik Logo"
+          class="nav-logo-img"
+          onerror="this.style.display='none'; document.getElementById('navFallback').style.display='inline-block';"
+        >
+        <div id="navFallback" class="brand-badge-fallback">B-QUIK</div>
+        <div class="brand-title">
+          <h1>EXECUTIVE EVALUATION REPORT</h1>
+          <p>สรุปผลการประเมินความพึงพอใจและประสิทธิผลการอบรม</p>
         </div>
       </div>
-
-      <div class="nav-actions">
-        <button class="btn btn-dark-ghost" id="btnRefresh" onclick="fetchReportDataFromAppsScript()">🔄 อัปเดตข้อมูล</button>
-        <button class="btn btn-outline-yellow" id="btnPrintCurrent" onclick="printCurrentTabPdf()">🖨️ เซฟ PDF รุ่นนี้ (A4)</button>
-        <button class="btn btn-yellow" onclick="printAllCohortsPdf()">📚 เซฟ PDF รวมทุกรุ่น (A4)</button>
+      <div class="action-buttons">
+        <button class="btn btn-outline" onclick="loadData()">
+          <i class="fa-solid fa-rotate"></i> อัปเดตข้อมูล
+        </button>
+        <button class="btn btn-yellow" onclick="window.print()">
+          <i class="fa-solid fa-file-pdf"></i> บันทึกเป็น PDF
+        </button>
       </div>
-    </div>
-
-    <div class="tabs-bar-bg">
-      <div class="tabs-strip" id="cohortTabsBar"></div>
     </div>
   </header>
 
-  <!-- พื้นที่เนื้อหารายงาน -->
-  <main class="container">
-    <div id="singleTabContainer" class="single-tab-view">
-      <div class="loading-box">
-        <div class="spinner"></div>
-        <div style="font-weight:700; font-size:15px; color:#141416;">กำลังดึงข้อมูลผลการประเมินจาก Google Sheet...</div>
-        <div style="font-size:12.5px; margin-top:4px;">โปรดรอสักครู่ ระบบกำลังประมวลผลข้อมูลล่าสุด</div>
+  <!-- Main Content -->
+  <main class="main-wrapper">
+
+    <!-- Filter Control Panel -->
+    <div class="control-panel">
+      <div class="control-top-row">
+        <div class="filter-label">
+          <i class="fa-solid fa-filter"></i> เลือกขอบเขตข้อมูลที่ต้องการดู:
+        </div>
+        <div class="benchmark-pill">
+          <i class="fa-solid fa-star" style="color:#B45309;"></i>
+          <span>เกณฑ์คะแนนเต็ม: <strong>5.00 คะแนน</strong></span>
+        </div>
+      </div>
+
+      <!-- Desktop: ปุ่มเรียงขึ้นบรรทัดใหม่อัตโนมัติ -->
+      <div class="batch-tabs" id="batchTabsContainer"></div>
+
+      <!-- Mobile: เมนู Dropdown -->
+      <div class="mobile-select-wrapper">
+        <select class="batch-select" id="batchMobileSelect" onchange="selectTab(this.value)"></select>
       </div>
     </div>
 
-    <div id="allCohortsPrintContainer" class="print-all-only"></div>
+    <!-- Report Sheet -->
+    <div class="report-container" id="reportContainer">
+
+      <!-- 1. Report Header -->
+      <div class="report-header">
+        <div class="report-header-left">
+          <img
+            src="https://oa-profile-media.line-scdn.net/0h6S0hvefpaXwNEXaa2LAWK1hOZw0-czB4anYkT3R5MjNWZGVWVxBvZXRDax5rIW54RBd6T10RbTd_RSZWVzZhSF1MdRxVQStWMhR5Zlp6di1FUQ"
+            alt="B-Quik Logo"
+            class="report-logo"
+            onerror="this.style.display='none';"
+          >
+          <div>
+            <h2>THE QUICK RECOVERY : EVALUATION SUMMARY</h2>
+            <p>รายงานสรุปผลการประเมินความพึงพอใจและประสิทธิผลการฝึกอบรม</p>
+          </div>
+        </div>
+        <div class="report-header-right">
+          <div class="scope-badge" id="reportScopeBadge">ภาพรวมทั้งหมดทุกรุ่น</div>
+          <small id="reportDateSub">ช่วงการอบรม: -</small>
+        </div>
+      </div>
+
+      <!-- 2. Overall Benchmark Bar -->
+      <div id="benchmarkContainer"></div>
+
+      <!-- 3. 4 KPI Cards (สะอาด ไม่มีตัวเลขส่วนต่างเล็กๆ กวนสายตา) -->
+      <div class="kpi-grid" id="kpiGrid"></div>
+
+      <!-- 4. Dimension 1 & 2 -->
+      <div class="grid-2col" id="dimensionsGrid"></div>
+
+      <!-- 5. Dimension 3: Modules Ranking -->
+      <div class="section-card" id="modulesCard"></div>
+
+      <!-- 6. Dimension 4: Qualitative Comments (แสดงข้อความทั้งหมด) -->
+      <div class="section-card qual-section-print" id="commentsCard"></div>
+
+      <!-- Footer -->
+      <div class="report-footer">
+        <span>B-Quik Training & Development | หลักสูตร The Quick Recovery</span>
+        <span id="footerTimestamp">อัปเดตข้อมูลล่าสุด: -</span>
+      </div>
+
+    </div>
   </main>
 
   <script>
-    // =========================================================================
-    // ตั้งค่า URL ของ Google Apps Script Web App (/exec) ที่ทำหน้าที่เป็น Database API
-    // =========================================================================
     const APPS_SCRIPT_API_URL = 'https://script.google.com/macros/s/AKfycbwDwBHBEfzD9XMg6_5yJh3AmCNPplHEXMp31qm66PWs07nnVSTwHTwTIETb36058dp2zw/exec';
-    const BQUIK_LOGO_URL = 'https://minio.aiitworks.tech/datahub/branches/242/e60c180f-76f4-4f1d-99b2-585b3e27f783.webp';
 
     let REPORT_DATA = null;
-    let ACTIVE_TAB_ID = null;
+    let ACTIVE_TAB_ID = 'OVERALL';
 
     window.addEventListener('DOMContentLoaded', () => {
-      fetchReportDataFromAppsScript();
+      loadData();
     });
 
-    /**
-     * ดึงข้อมูล JSONP สดจาก Google Apps Script URL (ข้ามข้อจำกัด CORS บน GitHub Pages ได้ 100%)
-     */
-    async function fetchReportDataFromAppsScript() {
-      const btn = document.getElementById('btnRefresh');
-      const container = document.getElementById('singleTabContainer');
+    function loadData() {
+      document.getElementById('loader').style.display = 'flex';
+      const callbackName = 'bqEvalCallback_' + Date.now();
 
-      if (btn) btn.textContent = '⏳ กำลังซิงค์...';
-      if (!REPORT_DATA) {
-        container.innerHTML = `
-          <div class="loading-box">
-            <div class="spinner"></div>
-            <div style="font-weight:700; font-size:15px; color:#141416;">กำลังเชื่อมต่อฐานข้อมูล Google Sheet...</div>
-            <div style="font-size:12.5px; margin-top:4px;">กำลังซิงค์ข้อมูลล่าสุดผ่าน Apps Script API</div>
-          </div>
-        `;
-      }
+      window[callbackName] = function(data) {
+        document.getElementById('loader').style.display = 'none';
+        delete window[callbackName];
+        document.getElementById(callbackName)?.remove();
 
-      try {
-        const data = await fetchViaJsonp(APPS_SCRIPT_API_URL);
-        handleLoadedData(data);
-      } catch (err) {
-        if (btn) btn.textContent = '🔄 อัปเดตข้อมูล';
-        container.innerHTML = `
-          <div class="loading-box" style="border-color:#FCA5A5;">
-            <div style="font-weight:800; font-size:16px; color:#DC2626; margin-bottom:6px;">ไม่สามารถเชื่อมต่อฐานข้อมูล Google Sheet ได้</div>
-            <div style="font-size:13px; color:#52525B; max-width:580px; margin:0 auto;">
-              กรุณาตรวจสอบว่าใน Google Apps Script ได้นำโค้ด <strong>Code.gs</strong> เวอร์ชัน API ไปวางแล้วกด <strong>Deploy > Manage deployments > Edit > New version > Deploy</strong> และตั้งค่าสิทธิ์เข้าถึงเป็น <strong>Anyone (ทุกคน)</strong>
-            </div>
-            <button class="btn btn-yellow" style="margin-top:16px;" onclick="fetchReportDataFromAppsScript()">ลองเชื่อมต่อใหม่อีกครั้ง</button>
-          </div>
-        `;
-      }
+        if (!data || data.error) {
+          alert(data && data.error ? data.error : 'ไม่สามารถโหลดข้อมูลได้ในขณะนี้');
+          return;
+        }
+
+        REPORT_DATA = data;
+        const exists = (ACTIVE_TAB_ID === 'OVERALL') || REPORT_DATA.cohorts.some(c => c.id === ACTIVE_TAB_ID);
+        if (!exists) {
+          ACTIVE_TAB_ID = 'OVERALL';
+        }
+
+        buildFilterControls();
+        renderReport();
+      };
+
+      const script = document.createElement('script');
+      script.id = callbackName;
+      const sep = APPS_SCRIPT_API_URL.includes('?') ? '&' : '?';
+      script.src = `${APPS_SCRIPT_API_URL}${sep}callback=${callbackName}&t=${Date.now()}`;
+      script.onerror = function() {
+        document.getElementById('loader').style.display = 'none';
+        alert('ไม่สามารถเชื่อมต่อข้อมูลได้ กรุณาลองใหม่อีกครั้ง');
+      };
+      document.body.appendChild(script);
     }
 
-    function fetchViaJsonp(baseUrl) {
-      return new Promise((resolve, reject) => {
-        const callbackName = 'bqCallback_' + Date.now() + '_' + Math.floor(Math.random() * 10000);
-        const script = document.createElement('script');
+    function buildFilterControls() {
+      const container = document.getElementById('batchTabsContainer');
+      const mobileSelect = document.getElementById('batchMobileSelect');
+      container.innerHTML = '';
+      mobileSelect.innerHTML = '';
 
-        const cleanup = () => {
-          try { delete window[callbackName]; } catch (e) { window[callbackName] = undefined; }
-          if (script.parentNode) script.parentNode.removeChild(script);
-        };
+      // 1. ปุ่มภาพรวมทุกรุ่น
+      const ovLabel = `ภาพรวมทุกรุ่น (${REPORT_DATA.overall.respondents} คน)`;
+      const ovBtn = document.createElement('button');
+      ovBtn.className = 'tab-btn' + (ACTIVE_TAB_ID === 'OVERALL' ? ' active' : '');
+      ovBtn.innerText = ovLabel;
+      ovBtn.onclick = () => selectTab('OVERALL');
+      container.appendChild(ovBtn);
 
-        const timer = setTimeout(() => {
-          cleanup();
-          reject(new Error('Connection Timeout'));
-        }, 20000);
+      const ovOpt = document.createElement('option');
+      ovOpt.value = 'OVERALL';
+      ovOpt.innerText = ovLabel;
+      if (ACTIVE_TAB_ID === 'OVERALL') ovOpt.selected = true;
+      mobileSelect.appendChild(ovOpt);
 
-        window[callbackName] = (data) => {
-          clearTimeout(timer);
-          cleanup();
-          resolve(data);
-        };
+      // 2. ปุ่มรายรุ่น (เริ่มที่รุ่นที่ 3 เป็นต้นไป)
+      REPORT_DATA.cohorts.forEach(c => {
+        const label = `${c.tabShortTitle} (${c.dateLabel})`;
 
-        script.onerror = () => {
-          clearTimeout(timer);
-          cleanup();
-          reject(new Error('Script Load Error'));
-        };
+        const btn = document.createElement('button');
+        btn.className = 'tab-btn' + (ACTIVE_TAB_ID === c.id ? ' active' : '');
+        btn.innerText = label;
+        btn.onclick = () => selectTab(c.id);
+        container.appendChild(btn);
 
-        const sep = baseUrl.indexOf('?') !== -1 ? '&' : '?';
-        script.src = `${baseUrl}${sep}callback=${callbackName}&t=${Date.now()}`;
-        document.body.appendChild(script);
+        const opt = document.createElement('option');
+        opt.value = c.id;
+        opt.innerText = label;
+        if (ACTIVE_TAB_ID === c.id) opt.selected = true;
+        mobileSelect.appendChild(opt);
       });
-    }
-
-    function handleLoadedData(data) {
-      const btn = document.getElementById('btnRefresh');
-      if (btn) btn.textContent = '🔄 อัปเดตข้อมูล';
-
-      if (!data || data.error) {
-        document.getElementById('singleTabContainer').innerHTML =
-          `<div class="loading-box" style="color:#DC2626;">${data ? escapeHtml(data.error) : 'ไม่พบข้อมูล'}</div>`;
-        return;
-      }
-
-      REPORT_DATA = data;
-      const exists = (ACTIVE_TAB_ID === 'OVERALL') || REPORT_DATA.cohorts.some(c => c.id === ACTIVE_TAB_ID);
-      if (!exists) {
-        ACTIVE_TAB_ID = REPORT_DATA.cohorts.length > 0 ? REPORT_DATA.cohorts[0].id : 'OVERALL';
-      }
-
-      buildTabsBar();
-      renderActiveTab();
-      renderAllCohortsForPrint();
-    }
-
-    function buildTabsBar() {
-      const tabsBar = document.getElementById('cohortTabsBar');
-      if (!REPORT_DATA || REPORT_DATA.error) {
-        tabsBar.innerHTML = '';
-        return;
-      }
-
-      document.getElementById('navCourseTitle').textContent =
-        `${REPORT_DATA.meta.organization} • ${REPORT_DATA.meta.courseTitle}`;
-      document.getElementById('navSubMeta').textContent =
-        `ช่วงอบรม ${REPORT_DATA.meta.dateRangeText} • ผู้ประเมิน ${REPORT_DATA.meta.totalResponses} คน (${REPORT_DATA.meta.totalCohorts} รุ่น) • อัปเดต ${REPORT_DATA.meta.generatedAt}`;
-
-      let html = '';
-      const totalCohorts = REPORT_DATA.cohorts.length;
-
-      REPORT_DATA.cohorts.forEach((c, idx) => {
-        const isActive = (ACTIVE_TAB_ID === c.id) ? 'active' : '';
-        const isLatest = (idx === totalCohorts - 1);
-        html += `
-          <button class="pill-tab ${isActive}" onclick="selectTab('${c.id}')" title="${isLatest ? 'รุ่นล่าสุด' : ''}">
-            ${isLatest ? '<span class="latest-dot"></span>' : ''}
-            <span>${escapeHtml(c.tabShortTitle)}</span>
-            <span class="tab-meta">(${c.dateLabel})</span>
-          </button>
-        `;
-      });
-
-      const isOvActive = (ACTIVE_TAB_ID === 'OVERALL') ? 'active' : '';
-      html += `
-        <button class="pill-tab ${isOvActive}" onclick="selectTab('OVERALL')">
-          <span>📊 ภาพรวมทุกรุ่น</span>
-          <span class="tab-meta">(${REPORT_DATA.overall.respondents} คน)</span>
-        </button>
-      `;
-
-      tabsBar.innerHTML = html;
-      updatePrintButtonLabel();
     }
 
     function selectTab(tabId) {
       ACTIVE_TAB_ID = tabId;
-      buildTabsBar();
-      renderActiveTab();
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+      buildFilterControls();
+      renderReport();
     }
 
-    function updatePrintButtonLabel() {
-      const btn = document.getElementById('btnPrintCurrent');
-      if (!btn || !REPORT_DATA || REPORT_DATA.error) return;
+    function renderReport() {
+      if (!REPORT_DATA) return;
 
-      if (ACTIVE_TAB_ID === 'OVERALL') {
-        btn.innerHTML = '🖨️ เซฟ PDF ภาพรวม (A4)';
-      } else {
-        const target = REPORT_DATA.cohorts.find(c => c.id === ACTIVE_TAB_ID);
-        const label = target ? target.tabShortTitle : 'รุ่นนี้';
-        btn.innerHTML = `🖨️ เซฟ PDF ${label} (A4)`;
-      }
-    }
+      const isOverall = (ACTIVE_TAB_ID === 'OVERALL');
+      const sec = isOverall
+        ? REPORT_DATA.overall
+        : REPORT_DATA.cohorts.find(c => c.id === ACTIVE_TAB_ID);
 
-    function renderActiveTab() {
-      const container = document.getElementById('singleTabContainer');
-      if (!REPORT_DATA || REPORT_DATA.error) return;
+      if (!sec) return;
 
-      const isOverallTab = (ACTIVE_TAB_ID === 'OVERALL');
-      if (isOverallTab) {
-        let html = buildFormalPdfHeader(REPORT_DATA.overall, true);
-        html += buildCompactBenchmarkBar('OVERALL', false);
-        html += buildCohortBodyHTML(REPORT_DATA.overall, true);
-        html += buildFormalPdfFooter();
-        container.innerHTML = html;
-      } else {
-        const targetCohort = REPORT_DATA.cohorts.find(c => c.id === ACTIVE_TAB_ID);
-        if (targetCohort) {
-          let html = buildFormalPdfHeader(targetCohort, false);
-          html += buildCompactBenchmarkBar(ACTIVE_TAB_ID, true);
-          html += buildCohortBodyHTML(targetCohort, false);
-          html += buildFormalPdfFooter();
-          container.innerHTML = html;
-        }
-      }
-    }
-
-    function renderAllCohortsForPrint() {
-      const allContainer = document.getElementById('allCohortsPrintContainer');
-      if (!REPORT_DATA || REPORT_DATA.error) return;
-
-      let html = `<div>`;
-      html += buildFormalPdfHeader(REPORT_DATA.overall, true);
-      html += buildCompactBenchmarkBar('OVERALL', false);
-      html += buildCohortBodyHTML(REPORT_DATA.overall, true);
-      html += buildFormalPdfFooter();
-      html += `</div>`;
-
-      REPORT_DATA.cohorts.forEach(cohort => {
-        html += `<div class="cohort-section page-break-before">`;
-        html += buildFormalPdfHeader(cohort, false);
-        html += buildCohortBodyHTML(cohort, false);
-        html += buildFormalPdfFooter();
-        html += `</div>`;
-      });
-
-      allContainer.innerHTML = html;
-    }
-
-    function printCurrentTabPdf() {
-      document.body.classList.remove('print-mode-all');
-      window.print();
-    }
-
-    function printAllCohortsPdf() {
-      document.body.classList.add('print-mode-all');
-      window.print();
-    }
-
-    window.addEventListener('afterprint', () => {
-      document.body.classList.remove('print-mode-all');
-    });
-
-    function buildFormalPdfHeader(sec, isOverall) {
-      const m = REPORT_DATA.meta;
+      // Header Info
       const scopeText = isOverall
-        ? `ภาพรวมทั้งหมด (${m.totalCohorts} รุ่น)`
-        : `${sec.badgeTitle} | ${sec.dateLabel}`;
+        ? `ภาพรวมทั้งหมด (${REPORT_DATA.meta.totalCohorts} รุ่น)`
+        : `${sec.badgeTitle} (${sec.dateLabel})`;
+      document.getElementById('reportScopeBadge').innerText = scopeText;
+      document.getElementById('reportDateSub').innerText = isOverall
+        ? `ช่วงอบรม: ${REPORT_DATA.meta.dateRangeText} • ผู้ประเมินรวม ${sec.respondents} คน`
+        : `วันที่อบรม: ${sec.dateLabel} • ผู้ประเมิน ${sec.respondents} คน`;
+      document.getElementById('footerTimestamp').innerText = `อัปเดตข้อมูลล่าสุด: ${REPORT_DATA.meta.generatedAt}`;
 
-      return `
-        <div class="formal-pdf-header">
-          <div class="fph-left">
-            <div class="fph-logo-box">
-              <img class="fph-logo-img" src="${BQUIK_LOGO_URL}" alt="B-Quik Logo"
-                onerror="this.style.display='none'; this.nextElementSibling.style.display='inline-block';">
-              <span class="fph-logo-fallback">B-Quik</span>
-            </div>
-            <div>
-              <div class="fph-kicker">B-Quik Training Evaluation Report</div>
-              <div class="fph-title">TRAINING EVALUATION SUMMARY REPORT: ${escapeHtml(m.courseTitle.toUpperCase())}</div>
-              <div class="fph-subtitle">สรุปผลการประเมินความพึงพอใจและประสิทธิผลการฝึกอบรม แบ่งตามด้านและรุ่น</div>
-            </div>
-          </div>
-          <div class="fph-right">
-            <div class="fph-scope-pill">${escapeHtml(scopeText)}</div>
-            <div class="fph-meta">ผู้ประเมิน: <strong>${sec.respondents} คน</strong> • พิมพ์เมื่อ: ${escapeHtml(m.generatedAt)}</div>
-          </div>
-        </div>
-      `;
-    }
-
-    function buildFormalPdfFooter() {
-      const m = REPORT_DATA.meta;
-      return `
-        <div class="formal-pdf-footer">
-          <div>B-Quik Training &amp; Development | หลักสูตร ${escapeHtml(m.courseTitle)}</div>
-          <div>พิมพ์รายงานเมื่อ: ${escapeHtml(m.generatedAt)}</div>
-        </div>
-      `;
-    }
-
-    function buildCompactBenchmarkBar(highlightId, hideWhenPrinting) {
+      // Benchmark Bar
       const ov = REPORT_DATA.overall;
-      const cohorts = REPORT_DATA.cohorts;
-      const hideClass = hideWhenPrinting ? 'benchmark-cohort-only-screen' : '';
-
-      return `
-        <div class="benchmark-card ${hideClass}">
+      document.getElementById('benchmarkContainer').innerHTML = `
+        <div class="benchmark-card">
           <div class="bm-summary">
             <div class="bm-eyebrow">ภาพรวมทุกรุ่น (OVERALL BENCHMARK)</div>
             <div class="bm-big-score">${ov.overallMean.toFixed(2)} <span>/ 5.00</span></div>
             <div class="bm-subtext">ความพึงพอใจ <strong>${ov.overallPercent}%</strong> • จาก ${ov.respondents} คน</div>
           </div>
-
-          <div class="bm-chart-wrap">
-            <div class="bm-chart-header">
-              <span>เปรียบเทียบคะแนนเฉลี่ยแต่ละรุ่นตามลำดับวันที่ (${cohorts.length} รุ่น)</span>
-              <span class="no-print" style="color:#71717A;">คลิกที่รุ่นเพื่อสลับดูข้อมูล</span>
-            </div>
-            <div class="bm-bars-row">
-              ${cohorts.map(c => {
-                const isSelected = (c.id === highlightId) ? 'is-selected' : '';
-                return `
-                  <div class="bm-col-item ${isSelected}" onclick="selectTab('${c.id}')">
-                    <div class="bm-col-top">
-                      <span class="bm-col-name">${escapeHtml(c.tabShortTitle)}</span>
-                      <span class="bm-col-val">${c.overallMean.toFixed(2)}</span>
-                    </div>
-                    <div class="bm-mini-track">
-                      <div class="bm-mini-fill" style="width:${c.overallPercent}%;"></div>
-                    </div>
-                  </div>
-                `;
-              }).join('')}
-            </div>
-          </div>
-        </div>
-      `;
-    }
-
-    function buildCohortBodyHTML(sec, isOverallSummary) {
-      const ov = REPORT_DATA.overall;
-      const d1 = sec.dimension1;
-      const d2 = sec.dimension2;
-      const d3 = sec.dimension3;
-      const d4 = sec.dimension4;
-
-      return `
-        <div class="section-header">
-          <div>
-            <h1>${escapeHtml(sec.badgeTitle)} — ${escapeHtml(REPORT_DATA.meta.courseTitle)}</h1>
-            <div class="date-sub">วันที่อบรม: <strong>${escapeHtml(sec.dateLabel)}</strong></div>
-          </div>
-          <div class="respondent-pill">ผู้ประเมิน ${sec.respondents} คน</div>
-        </div>
-
-        <div class="kpi-row">
-          <div class="kpi-box featured">
-            <div class="kpi-title">คะแนนเฉลี่ยรวม</div>
-            <div class="kpi-number-row">
-              <div class="kpi-number">${sec.overallMean.toFixed(2)}</div>
-              ${renderDiffTag(sec.overallMean, ov.overallMean, isOverallSummary)}
-            </div>
-            <div class="kpi-foot">ร้อยละ ${sec.overallPercent}% (ระดับ${sec.satisfactionLevel})</div>
-          </div>
-
-          <div class="kpi-box">
-            <div class="kpi-title">ด้านที่ 1: การบรรยายและวิทยากร</div>
-            <div class="kpi-number-row">
-              <div class="kpi-number">${d1.summary.mean.toFixed(2)}</div>
-              ${renderDiffTag(d1.summary.mean, ov.dimension1.summary.mean, isOverallSummary)}
-            </div>
-            <div class="kpi-foot">SD ${d1.summary.sd.toFixed(2)} • ร้อยละ ${d1.summary.percent}%</div>
-          </div>
-
-          <div class="kpi-box">
-            <div class="kpi-title">ด้านที่ 2: ความรู้และทักษะ</div>
-            <div class="kpi-number-row">
-              <div class="kpi-number">${d2.summary.mean.toFixed(2)}</div>
-              ${renderDiffTag(d2.summary.mean, ov.dimension2.summary.mean, isOverallSummary)}
-            </div>
-            <div class="kpi-foot">SD ${d2.summary.sd.toFixed(2)} • ร้อยละ ${d2.summary.percent}%</div>
-          </div>
-
-          <div class="kpi-box">
-            <div class="kpi-title">พัฒนาการความรู้ (ก่อน → หลัง)</div>
-            <div class="kpi-number-row">
-              <div class="kpi-number" style="color:#16A34A;">+${d2.prePost.gain.toFixed(2)}</div>
-              <span class="tag-diff tag-pos">+${d2.prePost.gainPct}%</span>
-            </div>
-            <div class="kpi-foot">ก่อน ${d2.prePost.preMean.toFixed(2)} → หลัง ${d2.prePost.postMean.toFixed(2)}</div>
-          </div>
-        </div>
-
-        <div class="grid-2col">
-          ${renderCleanDimensionCard(d1, ov.dimension1, null, isOverallSummary)}
-          ${renderCleanDimensionCard(d2, ov.dimension2, d2.prePost, isOverallSummary)}
-        </div>
-
-        <div class="card">
-          <div class="card-head">
-            <div class="card-title">${escapeHtml(d3.title)}</div>
-            <div class="card-avg">ฐานผู้ตอบ ${sec.respondents} คน</div>
-          </div>
-          <div class="mod-list">
-            ${d3.ranking.map((m, idx) => `
-              <div class="mod-item">
-                <div class="mod-top">
-                  <span><span class="mod-rank">${idx + 1}.</span>${escapeHtml(m.shortName)}</span>
-                  <span><strong>${m.count} คน</strong> <span style="color:#71717A;">(${m.percentOfRespondents}%)</span></span>
-                </div>
-                <div class="clean-track">
-                  <div class="clean-fill" style="width:${Math.min(100, m.percentOfRespondents)}%; background:${idx === 0 ? '#FFD100' : '#141416'};"></div>
-                </div>
-              </div>
-            `).join('')}
-          </div>
-        </div>
-
-        <div class="card">
-          <div class="card-head">
-            <div class="card-title">${escapeHtml(d4.title)}</div>
-            <div class="card-avg">สรุป 3 ประเด็น</div>
-          </div>
-          <div class="qual-cols">
-            ${renderCommentCol('สิ่งที่ได้รับจากการอบรม', d4.takeaways)}
-            ${renderCommentCol('ประเด็นสำคัญสำหรับพนักงานสาขา', d4.branchPriorities)}
-            ${renderCommentCol('ข้อเสนอแนะเพิ่มเติม', d4.suggestions)}
-          </div>
-        </div>
-      `;
-    }
-
-    function renderCleanDimensionCard(dim, overallDim, prePostObj, isOverallSummary) {
-      let prePostHTML = '';
-      if (prePostObj) {
-        prePostHTML = `
-          <div class="prepost-minimal">
-            <span>ความรู้ความเข้าใจ: ก่อนอบรม <strong>${prePostObj.preMean.toFixed(2)}</strong> → หลังอบรม <strong>${prePostObj.postMean.toFixed(2)}</strong></span>
-            <strong>เพิ่มขึ้น +${prePostObj.gain.toFixed(2)} (+${prePostObj.gainPct}%)</strong>
-          </div>
-        `;
-      }
-
-      return `
-        <div class="card">
-          <div class="card-head">
-            <div class="card-title">${escapeHtml(dim.title)}</div>
-            <div class="card-avg">${dim.summary.mean.toFixed(2)} / 5.00</div>
-          </div>
-
-          <div class="metric-list">
-            ${dim.items.map((item, idx) => {
-              const ovItem = overallDim.items[idx];
-              const ovPct = ovItem ? ovItem.percent : 0;
+          <div class="bm-bars-row">
+            ${REPORT_DATA.cohorts.map(c => {
+              const isSelected = (c.id === ACTIVE_TAB_ID) ? 'is-selected' : '';
               return `
-                <div class="metric-item">
-                  <div class="metric-top">
-                    <span class="metric-label">${escapeHtml(item.label)}</span>
-                    <span class="metric-val">${item.mean.toFixed(2)} <small>(${item.percent}%)</small></span>
+                <div class="bm-col-item ${isSelected}" onclick="selectTab('${c.id}')">
+                  <div class="bm-col-top">
+                    <span class="bm-col-name">${escapeHtml(c.tabShortTitle)}</span>
+                    <span class="bm-col-val">${c.overallMean.toFixed(2)}</span>
                   </div>
-                  <div class="clean-track" title="คะแนนข้อนี้ ${item.mean.toFixed(2)} | ขีดสีแดง = ค่าเฉลี่ยภาพรวม ${ovItem ? ovItem.mean.toFixed(2) : '-'}">
-                    ${!isOverallSummary ? `<div class="benchmark-pin" style="left:${ovPct}%;"></div>` : ''}
-                    <div class="clean-fill" style="width:${item.percent}%;"></div>
+                  <div class="bm-mini-track">
+                    <div class="bm-mini-fill" style="width:${c.overallPercent}%;"></div>
                   </div>
                 </div>
               `;
             }).join('')}
           </div>
+        </div>
+      `;
 
-          ${prePostHTML}
+      // 4 KPI Cards (สะอาด ไม่มีป้าย +0.05)
+      const d1 = sec.dimension1;
+      const d2 = sec.dimension2;
+      document.getElementById('kpiGrid').innerHTML = `
+        <div class="kpi-card highlight">
+          <div class="kpi-label">คะแนนเฉลี่ยรวม</div>
+          <div class="kpi-value">${sec.overallMean.toFixed(2)}</div>
+          <div class="kpi-sub">ร้อยละ ${sec.overallPercent}% (ระดับ${sec.satisfactionLevel})</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-label">ด้านที่ 1: การบรรยายและวิทยากร</div>
+          <div class="kpi-value">${d1.summary.mean.toFixed(2)}</div>
+          <div class="kpi-sub">SD ${d1.summary.sd.toFixed(2)} • ร้อยละ ${d1.summary.percent}%</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-label">ด้านที่ 2: ความรู้และทักษะ</div>
+          <div class="kpi-value">${d2.summary.mean.toFixed(2)}</div>
+          <div class="kpi-sub">SD ${d2.summary.sd.toFixed(2)} • ร้อยละ ${d2.summary.percent}%</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-label">พัฒนาการความรู้ (ก่อน → หลัง)</div>
+          <div class="kpi-value" style="color:var(--pass-green);">+${d2.prePost.gain.toFixed(2)}</div>
+          <div class="kpi-sub">ก่อน ${d2.prePost.preMean.toFixed(2)} → หลัง ${d2.prePost.postMean.toFixed(2)}</div>
+        </div>
+      `;
+
+      // Dimensions 1 & 2
+      document.getElementById('dimensionsGrid').innerHTML = `
+        ${renderDimensionCard(d1, null)}
+        ${renderDimensionCard(d2, d2.prePost)}
+      `;
+
+      // Dimension 3: Modules Ranking
+      const d3 = sec.dimension3;
+      document.getElementById('modulesCard').innerHTML = `
+        <div class="card-head">
+          <div class="card-title">${escapeHtml(d3.title)}</div>
+          <div class="card-avg">ฐานผู้ตอบ ${sec.respondents} คน</div>
+        </div>
+        <div class="mod-list">
+          ${d3.ranking.map((m, idx) => `
+            <div>
+              <div class="mod-top">
+                <span><span class="mod-rank">${idx + 1}.</span>${escapeHtml(m.shortName)}</span>
+                <span><strong>${m.count} คน</strong> <span style="color:#64748B;">(${m.percentOfRespondents}%)</span></span>
+              </div>
+              <div class="clean-track">
+                <div class="clean-fill" style="width:${Math.min(100, m.percentOfRespondents)}%; background:${idx === 0 ? 'var(--bq-yellow)' : 'var(--bq-black)'};"></div>
+              </div>
+            </div>
+          `).join('')}
+        </div>
+      `;
+
+      // Dimension 4: Qualitative Comments (แสดงทั้งหมดครบทุกรายการ)
+      const d4 = sec.dimension4;
+      document.getElementById('commentsCard').innerHTML = `
+        <div class="card-head">
+          <div class="card-title">${escapeHtml(d4.title)}</div>
+          <div class="card-avg">ความคิดเห็นทั้งหมด</div>
+        </div>
+        <div class="qual-cols">
+          ${renderCommentCol('สิ่งที่ได้รับจากการอบรม', d4.takeaways)}
+          ${renderCommentCol('ประเด็นสำคัญสำหรับพนักงานสาขา', d4.branchPriorities)}
+          ${renderCommentCol('ข้อเสนอแนะเพิ่มเติม', d4.suggestions)}
         </div>
       `;
     }
 
-    function renderDiffTag(val, benchmarkVal, isOverallSummary) {
-      if (isOverallSummary) return '';
-      const diff = Number((val - benchmarkVal).toFixed(2));
-      if (diff > 0) return `<span class="tag-diff tag-pos">+${diff.toFixed(2)}</span>`;
-      if (diff < 0) return `<span class="tag-diff tag-neg">${diff.toFixed(2)}</span>`;
-      return `<span class="tag-diff tag-neu">0.00</span>`;
+    function renderDimensionCard(dim, prePostObj) {
+      let prePostHTML = '';
+      if (prePostObj) {
+        prePostHTML = `
+          <div class="prepost-banner">
+            <span>ความรู้ความเข้าใจ: ก่อนอบรม <strong>${prePostObj.preMean.toFixed(2)}</strong> → หลังอบรม <strong>${prePostObj.postMean.toFixed(2)}</strong></span>
+            <strong style="color:var(--pass-green);">เพิ่มขึ้น +${prePostObj.gain.toFixed(2)} (+${prePostObj.gainPct}%)</strong>
+          </div>
+        `;
+      }
+
+      return `
+        <div class="section-card">
+          <div class="card-head">
+            <div class="card-title">${escapeHtml(dim.title)}</div>
+            <div class="card-avg">${dim.summary.mean.toFixed(2)} / 5.00</div>
+          </div>
+          <div class="metric-list">
+            ${dim.items.map(item => `
+              <div>
+                <div class="metric-top">
+                  <span class="metric-label">${escapeHtml(item.label)}</span>
+                  <span class="metric-val">${item.mean.toFixed(2)} <small>(${item.percent}%)</small></span>
+                </div>
+                <div class="clean-track">
+                  <div class="clean-fill" style="width:${item.percent}%;"></div>
+                </div>
+              </div>
+            `).join('')}
+          </div>
+          ${prePostHTML}
+        </div>
+      `;
     }
 
     function renderCommentCol(title, list) {
@@ -1447,33 +1219,19 @@
         return `
           <div class="qual-col">
             <h4>${escapeHtml(title)} (0)</h4>
-            <div style="font-size:12px; color:#71717A;">ไม่มีข้อเสนอแนะ</div>
+            <div style="font-size:0.8rem; color:#64748B;">ไม่มีข้อเสนอแนะ</div>
           </div>
         `;
       }
 
-      const limit = 6;
-      const hasMore = list.length > limit;
-      const remainCount = list.length - limit;
-
       return `
         <div class="qual-col">
           <h4>${escapeHtml(title)} (${list.length})</h4>
-          <div class="comment-chips">
-            ${list.map((c, idx) => `
-              <span class="chip ${idx >= limit ? 'hidden-chip' : ''}">${escapeHtml(c.text)}</span>
-            `).join('')}
+          <div class="comment-list">
+            ${list.map(c => `<span class="chip">${escapeHtml(c.text)}</span>`).join('')}
           </div>
-          ${hasMore ? `<button class="toggle-more-btn" onclick="toggleComments(this, ${remainCount})">+ ดูทั้งหมดอีก ${remainCount} รายการ</button>` : ''}
-          ${hasMore ? `<div class="print-only-more-note">+ และอีก ${remainCount} รายการ</div>` : ''}
         </div>
       `;
-    }
-
-    function toggleComments(btn, hiddenCount) {
-      const col = btn.closest('.qual-col');
-      const isExpanded = col.classList.toggle('expanded');
-      btn.textContent = isExpanded ? 'ย่อรายการ' : `+ ดูทั้งหมดอีก ${hiddenCount} รายการ`;
     }
 
     function escapeHtml(str) {
